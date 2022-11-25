@@ -1,28 +1,27 @@
         Building Wordle
 
+---- by wednesday just have it function to check input string = answer string directly - just one line of a grid nothing more. just 100% match or not.
 
-Rough outtline of User input 
-    - What does the user see of the game? 
-        - The user see's two areas of the screen, one is the 5column x 6row output grid that tracks the users current and previous input and displays the games feedback on this input upon clicking enter. 
-        -The other 10column x 3 row grid is for user input and is a list of alphabetical keys, a submit(enter) button, and a backspace button
+Rough outtline of User input - What does the user see of the game? - The user see's two areas of the screen, one is the 5column x 6row output grid that tracks the users current and previous input and displays the games feedback on this input upon clicking enter.
+-The other 10column x 3 row grid is for user input and is a list of alphabetical keys, a submit(enter) button, and a backspace button
 
     - How does the user interact with the game?
-        - The user clicks and input key of their chosen letter, the letter then appears in the display grid. This continues until 5 letters are input and the user presses enter at which point feedback is returned on the guess. (input must === 5 or submit !work) 
+        - The user clicks and input key of their chosen letter, the letter then appears in the display grid. This continues until 5 letters are input and the user presses enter at which point feedback is returned on the guess. (input must === 5 or submit !work)
         - 4 input types - letters - submit - clear - refresh/restart game
             -29 buttons - 26 letters, 1 clear, 1 enter - 1 restart - 5 letter cap on input (condition check if array.length<6 allow if else - do nothing/give feedback) - on submit we need to store their input to stay displayed and create a new way to store the next word input
         - The user may clear back through their answer at any point using the clear button (on clear we must remove the last value input and be able to remove all 5 values - array.push on input ? array pop - if pressed and 0 letter left provide feedback to user the button wont work. )
 
     -What unexpected inputs may there be?
         - >5 letters for a guess
-        - number of clears > number of letters input 
+        - number of clears > number of letters input
         - clicking enter guess before having 5 letters
         - potential pitfall - entering more than one of the same letter - how do we handle this?
 
-        look at later - words not in the english dictionary. 
+        look at later - words not in the english dictionary.
 
-    -How does the game provide feedback to the user? 
-        - Displaying letters input as done - on click - 
-        - Displaying previous words submitted at all times - object with 6 empty arrays - on submit updates to next array? or string vs string check and on each button click use a for loop to check if it has input then inputs in the nexT? 
+    -How does the game provide feedback to the user?
+        - Displaying letters input as done - on click -
+        - Displaying previous words submitted at all times - object with 6 empty arrays - on submit updates to next array? or string vs string check and on each button click use a for loop to check if it has input then inputs in the nexT?
         - Dispalying which words are in the word but not the right place (use array index check - check for right index position and if the array contains it at all)
         - displaying on the keyboard the same feedback as in the display (same function applies the same css class to both output and input).
 
@@ -32,21 +31,43 @@ Rough outtline of User input
         - The user runs out of guess - NEed to restrict and input except restart at this point.
 
     -How does the user start a new game?
-        - We need a restart button that resets all. 
+        - We need a restart button that resets all.
 
 
-Build the game to check against 1 five letter word first then scale up if succesfull 
-- use recap day demo on chekcing a string against a string by converting it to an array and foreaching it. 
+                                    Steps for build
+
+Get NPM installed with correct packages
+Get it deployed
+get jest installed
+
+html
+Build strucutre
+layout elements - semantic
+classes - BEM - values, alphabetical buttons, clear, reset, submit - output inner divs id's done.
+Sass
+grid and basic positioning of the two, put the elements in the correct div col/row - nothing more
+
+Javascript
+Build the game to just compare string for string on 1 attempt by wednesday
+Then branch it for new features - more detailed checks and feedback
+Then branch it to go across a grid.
+Then implement dictionary import / word grabber
+
+Style it up
+Buttonpress feedback classes
+Winner confetti / fly in css elements
+
+                                    IF this all goes way not to plan and only get single row working - make the random answers an array that includes a text field with some form of riddle/question that pulls into a div above the output row and call it a quiz.
+
+- use recap day demo on chekcing a string against a string by converting it to an array and foreaching it.
 
 Design
 header - nav bar
-body 
-    grid container
-        1 x 2 - decent grid gap
-        max widths of both 
-            2 sub grids
-            centred text with padding - borders radius 
+body
+grid container
+1 x 2 - decent grid gap
+max widths of both
+2 sub grids
+centred text with padding - borders radius
 
-Functionality
-    -   need a answer input function - json object with array items that have number:value and word:value - random number generator picks the word - long term
-    - For the mvp just make it work with 1/2 words manually inputted then go from there 
+Functionality - need a answer input function - json object with array items that have number:value and word:value - random number generator picks the word - long term - For the mvp just make it work with 1/2 words manually inputted then go from there
