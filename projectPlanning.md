@@ -48,3 +48,5 @@ body
             centred text with padding - borders radius 
 
 Functionality
+    -   need a answer input function - json object with array items that have number:value and word:value - random number generator picks the word - long term
+    - For the mvp just make it work with 1/2 words manually inputted then go from there 
