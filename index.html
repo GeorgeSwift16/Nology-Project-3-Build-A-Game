@@ -5,10 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="main.css" />
+    <script
+      src="https://kit.fontawesome.com/a62cfe0090.js"
+      crossorigin="anonymous"
+    ></script>
     <title>Wordle - Build a game</title>
   </head>
   <body>
-    <header></header>
+    <header class="navigation-bar">
+      <div class="navigation-bar__more-from-menu">
+        <a class="navigation-bar__link" href=""
+          ><i class="navigation-bar__icon fa-solid fa-bars"></i
+        ></a>
+      </div>
+      <h1 class="navigation-bar__header">Wordle</h1>
+      <nav class="navigation-bar__game-menu">
+        <a class="navigation-bar__link" href=""
+          ><i class="navigation-bar__icon fa-solid fa-gear"></i
+        ></a>
+        <a class="navigation-bar__link" href=""
+          ><i class="navigation-bar__icon fa-solid fa-bars"></i
+        ></a>
+        <a class="navigation-bar__link" href=""
+          ><i class="navigation-bar__icon fa-solid fa-chart-simple"></i
+        ></a>
+      </nav>
+    </header>
     <section class="game-container">
       <section class="output-grid">
         <output class="output-grid__display-box" id="display-box-1"></output>
@@ -43,39 +65,210 @@
         <output class="output-grid__display-box" id="display-box-30"></output>
       </section>
       <section class="input-grid">
-        <button class="input-grid__button button-letter" value="Q">Q</button>
-        <button class="input-grid__button button-letter" value="W">W</button>
-        <button class="input-grid__button button-letter" value="E">E</button>
-        <button class="input-grid__button button-letter" value="R">R</button>
-        <button class="input-grid__button button-letter" value="T">T</button>
-        <button class="input-grid__button button-letter" value="Y">Y</button>
-        <button class="input-grid__button button-letter" value="U">U</button>
-        <button class="input-grid__button button-letter" value="I">I</button>
-        <button class="input-grid__button button-letter" value="O">O</button>
-        <button class="input-grid__button button-letter" value="P">P</button>
-        <button class="input-grid__button button-letter" value="A">A</button>
-        <button class="input-grid__button button-letter" value="S">S</button>
-        <button class="input-grid__button button-letter" value="D">D</button>
-        <button class="input-grid__button button-letter" value="F">F</button>
-        <button class="input-grid__button button-letter" value="G">G</button>
-        <button class="input-grid__button button-letter" value="H">H</button>
-        <button class="input-grid__button button-letter" value="J">J</button>
-        <button class="input-grid__button button-letter" value="K">K</button>
-        <button class="input-grid__button button-letter" value="L">L</button>
-        <button class="input-grid__button" id="ENTER" value="ENTER">
+        <button
+          type="button"
+          class="input-grid__button button-letter"
+          value="Q"
+        >
+          Q
+        </button>
+        <button
+          type="button"
+          class="input-grid__button button-letter"
+          value="W"
+        >
+          W
+        </button>
+        <button
+          type="button"
+          class="input-grid__button button-letter"
+          value="E"
+        >
+          E
+        </button>
+        <button
+          type="button"
+          class="input-grid__button button-letter"
+          value="R"
+        >
+          R
+        </button>
+        <button
+          type="button"
+          class="input-grid__button button-letter"
+          value="T"
+        >
+          T
+        </button>
+        <button
+          type="button"
+          class="input-grid__button button-letter"
+          value="Y"
+        >
+          Y
+        </button>
+        <button
+          type="button"
+          class="input-grid__button button-letter"
+          value="U"
+        >
+          U
+        </button>
+        <button
+          type="button"
+          class="input-grid__button button-letter"
+          value="I"
+        >
+          I
+        </button>
+        <button
+          type="button"
+          class="input-grid__button button-letter"
+          value="O"
+        >
+          O
+        </button>
+        <button
+          type="button"
+          class="input-grid__button button-letter"
+          value="P"
+        >
+          P
+        </button>
+        <button
+          type="button"
+          class="input-grid__button button-letter"
+          value="A"
+        >
+          A
+        </button>
+        <button
+          type="button"
+          class="input-grid__button button-letter"
+          value="S"
+        >
+          S
+        </button>
+        <button
+          type="button"
+          class="input-grid__button button-letter"
+          value="D"
+        >
+          D
+        </button>
+        <button
+          type="button"
+          class="input-grid__button button-letter"
+          value="F"
+        >
+          F
+        </button>
+        <button
+          type="button"
+          class="input-grid__button button-letter"
+          value="G"
+        >
+          G
+        </button>
+        <button
+          type="button"
+          class="input-grid__button button-letter"
+          value="H"
+        >
+          H
+        </button>
+        <button
+          type="button"
+          class="input-grid__button button-letter"
+          value="J"
+        >
+          J
+        </button>
+        <button
+          type="button"
+          class="input-grid__button button-letter"
+          value="K"
+        >
+          K
+        </button>
+        <button
+          type="button"
+          class="input-grid__button button-letter"
+          value="L"
+        >
+          L
+        </button>
+        <button
+          type="button"
+          class="input-grid__button"
+          id="ENTER"
+          value="ENTER"
+        >
           ENTER
         </button>
-        <button class="input-grid__button button-letter" value="Z">Z</button>
-        <button class="input-grid__button button-letter" value="X">X</button>
-        <button class="input-grid__button button-letter" value="C">C</button>
-        <button class="input-grid__button button-letter" value="V">V</button>
-        <button class="input-grid__button button-letter" value="B">B</button>
-        <button class="input-grid__button button-letter" value="N">N</button>
-        <button class="input-grid__button button-letter" value="M">M</button>
-        <button class="input-grid__button" id="CLEAR" value="CLEAR">
+        <button
+          type="button"
+          class="input-grid__button button-letter"
+          value="Z"
+        >
+          Z
+        </button>
+        <button
+          type="button"
+          class="input-grid__button button-letter"
+          value="X"
+        >
+          X
+        </button>
+        <button
+          type="button"
+          class="input-grid__button button-letter"
+          value="C"
+        >
+          C
+        </button>
+        <button
+          type="button"
+          class="input-grid__button button-letter"
+          value="V"
+        >
+          V
+        </button>
+        <button
+          type="button"
+          class="input-grid__button button-letter"
+          value="B"
+        >
+          B
+        </button>
+        <button
+          type="button"
+          class="input-grid__button button-letter"
+          value="N"
+        >
+          N
+        </button>
+        <button
+          type="button"
+          class="input-grid__button button-letter"
+          value="M"
+        >
+          M
+        </button>
+        <button
+          type="button"
+          class="input-grid__button"
+          id="CLEAR"
+          value="CLEAR"
+        >
           CLEAR
         </button>
-        <button class="input-grid__button" id="RESET" value="RESET">
+        <button
+          type="button"
+          class="input-grid__button"
+          id="RESET"
+          value="RESET"
+        >
           RESET
         </button>
       </section>
