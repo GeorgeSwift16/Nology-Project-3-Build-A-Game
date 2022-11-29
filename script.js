@@ -1,4 +1,6 @@
 /*                                  Global variables            */
+let currentLetterString = "";
+let answerString = "";
 let activeOutputBoxIndex = 0;
 // Active output box
 /*                                  DOM Variables               */
@@ -19,6 +21,8 @@ const outputDisplayBoxes = document.querySelectorAll(
 );
 const handleLetterInput = (event) => {
   outputDisplayBoxes[activeOutputBoxIndex].innerHTML = event.target.value;
+  currentLetterString += event.target.value;
+  console.log(currentLetterString);
 };
 
 // function to change active square step
