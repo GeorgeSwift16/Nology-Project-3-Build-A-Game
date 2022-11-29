@@ -2,9 +2,8 @@
 let currentLetterString = "";
 let answerString = "";
 let activeOutputBoxIndex = 0;
-let rowInputLetterString = "";
 let rowInputArray = [];
-
+let answerarray = [];
 // Active output box
 /*                                  DOM Variables               */
 //input variables
@@ -23,14 +22,29 @@ const submitInputButton = document.getElementById("SUBMIT");
 const outputDisplayBoxes = document.querySelectorAll(
   ".output-grid__display-box"
 );
-//  steps to get answer - pull element from the outputdisplayboxes into an array - next compare index at i(input) = index at i (output) - if ===
-const getRowInputAnswer = (input) => {
-  for (let index = input - 4; index < input + 1; index++) {
-    rowInputArray.push(outputDisplayBoxes[index].innerHTML);
-  }
+
+/*           colour styling - to make into class application  */
+/*                  initial box colour                  */
+outputDisplayBoxes[activeOutputBoxIndex].style.border = "3px solid red";
+// change cloose on activeboxindex change input=activeboxindex
+const getActiveColor = (input) => {
+  outputDisplayBoxes[input + 1].style.border = "3px solid grey";
+  outputDisplayBoxes[input - 1].style.border = "3px solid grey";
+  outputDisplayBoxes[input].style.border = "3px solid red";
 };
 
-// -----------------------------------------new code
+/*                              functions to check answer                 */
+//  steps to get answer - pull element from the outputdisplayboxes into an array - next compare index at i(input) = index at i (output) - if ===
+const getRowInput = () => {
+  for (
+    let index = activeOutputBoxIndex - 4;
+    index < activeOutputBoxIndex + 1;
+    index++
+  ) {
+    rowInputArray.push(outputDisplayBoxes[index].innerHTML);
+  }
+  console.log(rowInputArray);
+};
 
 // initial input functions to check next steps for each button
 const handleLetterInput = (event) => {
@@ -48,16 +62,18 @@ const handleBackInput = (event) => {
     changeActiveOutput(event.target.value);
   }
 };
+
 // refactor the below in future
 const handleSubmitInput = (event) => {
-  let checkIfEndOfLine = activeOutputBoxIndex % 5;
-  if (checkIfEndOfLine) {
-    console.log(rowInputArray);
+  // +1 used to prevent edge case of index=0
+  let checkIfLineEnd = (activeOutputBoxIndex + 1) % 5;
+  if (checkIfLineEnd === 0) {
     // run check answer
-    getRowInputAnswer(activeOutputBoxIndex);
+    getRowInput();
     changeActiveOutput(event.target.value);
   }
 };
+
 const handleResetInput = (event) => {
   changeActiveOutput(event.target.value);
 };
@@ -74,7 +90,7 @@ const changeActiveOutput = (input) => {
   } else if (input === "SUBMIT") {
     activeOutputBoxIndex += 1;
   }
-  outputDisplayBoxes[activeOutputBoxIndex].style.border = "3px solid red";
+  getActiveColor(activeOutputBoxIndex);
 };
 
 /*                        Event listeners                   */
