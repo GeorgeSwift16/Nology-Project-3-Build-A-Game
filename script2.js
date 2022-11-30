@@ -1,9 +1,11 @@
 /*                                  Global variables            */
-let currentLetterString = "";
-let answerString = "";
 let activeOutputBoxIndex = 0;
-let rowInputArray = [];
-let answerarray = [];
+let rowInputHtmlArray = [];
+let rowInputString = "";
+let answerArray = ["L", "L", "L", "L", "P"];
+let answerString = "LLLLP";
+let charactersAtCorrectPosition = [];
+let charactersGuessedButNotInAnswer = [];
 // Active output box
 /*                                  DOM Variables               */
 //input variables
@@ -26,31 +28,85 @@ const outputDisplayBoxes = document.querySelectorAll(
 /*           colour styling - to make into class application  */
 /*                  initial box colour                  */
 outputDisplayBoxes[activeOutputBoxIndex].style.border = "3px solid red";
-// change cloose on activeboxindex change input=activeboxindex
+// change border color to highlight focused displaybox change
 const getActiveColor = (input) => {
   outputDisplayBoxes.forEach((element) => {
-    if (element == outputDisplayBoxes[input]) {
-      element.style.border = "3px solid red";
-    } else {
-      element.style.border = "3px solid grey";
-    }
+    const borderColor = element == outputDisplayBoxes[input] ? "red" : "grey";
+
+    element.style.border = `3px solid ${borderColor}`;
   });
 };
 
-/*                              functions to check answer                 */
-//  steps to get answer - pull element from the outputdisplayboxes into an array - next compare index at i(input) = index at i (output) - if ===
-const getRowInput = () => {
+const getMatchColor = (input) => {
+  outputDisplayBoxes.forEach((element) => {
+    const borderColor = element == outputDisplayBoxes[input] ? "red" : "grey";
+
+    element.style.border = `3px solid ${borderColor}`;
+  });
+};
+
+// submit step 6 - if not their last guess, does guess contain any of the answer characters? if it does next step of answer check - if not all html elements where that char is the innerhtml go to grey.
+// ------------------refactor this maybe
+
+// submit step 6 - Does the answer contain any correct characters or should we turn them all grey?
+
+const checkAnswer = () => {};
+// point to start from 30/11/2022
+// submit step 5 - if this guess was incorrect was it their last possible guess?
+const checkIfLastGuess = () => {
+  const isLastGuess = activeOutputBoxIndex === 29;
+  if (isLastGuess) {
+    alert("sorry game over, please hit restart to try again =(");
+  } else {
+    checkIfAnswerContainsInput();
+  }
+};
+
+// submit step 4 - check if answer is 100% correct
+const checkIfAnswerCorrect = () => {
+  const isAnswerCorrect = answerString === rowInputString;
+  if (isAnswerCorrect) {
+    alert("congrats you won! - replace with func");
+  } else {
+    checkIfLastGuess();
+  }
+};
+// console.log();
+// submit step 3 - get a string of the rows input
+const getRowInputString = () => {
+  rowInputString = rowInputHtmlArray.join("");
+  const isRowInputComplete = rowInputString.length === 5;
+  if (isRowInputComplete) {
+    checkIfAnswerCorrect();
+  } else {
+    alert("please fill in all squares before we check your answer!");
+  }
+};
+
+// submit step 2 - get the input for the row - create array from row start to row end based on activeoutputindex
+const getRowInputArr = () => {
   for (
     let index = activeOutputBoxIndex - 4;
     index < activeOutputBoxIndex + 1;
     index++
   ) {
-    rowInputArray.push(outputDisplayBoxes[index].innerHTML);
+    const displayBoxHtml = outputDisplayBoxes[index].innerHTML;
+    rowInputHtmlArray.push(displayBoxHtml);
   }
-  console.log(rowInputArray);
+  getRowInputString();
 };
 
-// initial input functions to check next steps for each button
+// submit step 1
+const handleCheckIfLineEnd = () => {
+  const isLineEnd = (activeOutputBoxIndex + 1) % 5 === 0;
+  if (isLineEnd) {
+    getRowInputArr();
+  } else {
+    alert("You can only submit your answer at the end of the row");
+  }
+};
+
+//            initial input functions to check next steps for each button
 const handleLetterInput = (event) => {
   outputDisplayBoxes[activeOutputBoxIndex].innerHTML = event.target.value;
 };
@@ -63,17 +119,6 @@ const handleNextInput = (event) => {
 const handleBackInput = (event) => {
   let checkIfNewLine = activeOutputBoxIndex % 5;
   if (activeOutputBoxIndex != 0 && checkIfNewLine) {
-    changeActiveOutput(event.target.value);
-  }
-};
-
-// refactor the below in future - split this down to -> if at end of the line -> nextfunctocheck() -> else alert(you cant do that yet). next func to check is then -> run row input if rowinput.join length = 4 - alert you need to compelte all answer - else if rowninput.join = 5 -> nextAnswercheckfunc()
-const handleSubmitInput = (event) => {
-  // +1 used to prevent edge case of index=0
-  let checkIfLineEnd = (activeOutputBoxIndex + 1) % 5;
-  if (checkIfLineEnd === 0) {
-    // run check answer
-    getRowInput();
     changeActiveOutput(event.target.value);
   }
 };
@@ -106,4 +151,4 @@ for (let index = 0; index < allLetterInputButtons.length; index++) {
 nextInputButton.addEventListener("click", handleNextInput);
 backInputButton.addEventListener("click", handleBackInput);
 resetInputButton.addEventListener("click", handleResetInput);
-submitInputButton.addEventListener("click", handleSubmitInput);
+submitInputButton.addEventListener("click", handleCheckIfLineEnd);
