@@ -28,9 +28,13 @@ const outputDisplayBoxes = document.querySelectorAll(
 outputDisplayBoxes[activeOutputBoxIndex].style.border = "3px solid red";
 // change cloose on activeboxindex change input=activeboxindex
 const getActiveColor = (input) => {
-  outputDisplayBoxes[input + 1].style.border = "3px solid grey";
-  outputDisplayBoxes[input - 1].style.border = "3px solid grey";
-  outputDisplayBoxes[input].style.border = "3px solid red";
+  outputDisplayBoxes.forEach((element) => {
+    if (element == outputDisplayBoxes[input]) {
+      element.style.border = "3px solid red";
+    } else {
+      element.style.border = "3px solid grey";
+    }
+  });
 };
 
 /*                              functions to check answer                 */
@@ -63,7 +67,7 @@ const handleBackInput = (event) => {
   }
 };
 
-// refactor the below in future
+// refactor the below in future - split this down to -> if at end of the line -> nextfunctocheck() -> else alert(you cant do that yet). next func to check is then -> run row input if rowinput.join length = 4 - alert you need to compelte all answer - else if rowninput.join = 5 -> nextAnswercheckfunc()
 const handleSubmitInput = (event) => {
   // +1 used to prevent edge case of index=0
   let checkIfLineEnd = (activeOutputBoxIndex + 1) % 5;
