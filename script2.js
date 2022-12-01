@@ -38,9 +38,19 @@ const getActiveColor = (input) => {
   });
 };
 
-// colour application for correctness of row input
+// grey color application for inputbuttons of incorrect characters
+const applyGreyToWrongLetterInputKeys = (input) => {
+  for (let index = 0; index < allLetterInputButtons.length; index++) {
+    const element = allLetterInputButtons[index];
+    if (input == element.value) {
+      console.log(element);
+      element.style.backgroundColor = "pink";
+    }
+  }
+};
+
+// colour application for correctness of row input on row
 const applyCorrectColouration = (correctness, indexCount) => {
-  console.log(correctness);
   let activeRowStart = 0;
   activeRowStart = activeOutputBoxIndex - 4;
   let boxToApplyColor = 0;
@@ -52,13 +62,12 @@ const applyCorrectColouration = (correctness, indexCount) => {
     boxToColor.style.backgroundColor = "orange";
   } else {
     boxToColor.style.backgroundColor = "grey";
-    charactersGuessedButNotInAnswer.push(correctness);
+    applyGreyToWrongLetterInputKeys(correctness);
   }
 };
 //  ------------------------------------------------------------------------
 
 // submit step 7 - Now pass the correct info to the colourupdating function to return feedback to the user based on the correctness of their answer
-// current issue is - when it loops through the chance is captured.
 const handleProvideUserFeedback = (input) => {
   let indexCount = 0;
   console.log(input);
@@ -67,33 +76,9 @@ const handleProvideUserFeedback = (input) => {
     indexCount += 1;
   });
   indexCount = 0;
+  console.log(input);
+  console.log(input);
 };
-
-// for (let index = 0; index < input.length; index++) {
-//   let element = input[index];
-//   if (element === "match") {
-//     applyCorrectColouration(element, indexCount);
-//     indexCount += 1;
-//     input.shift();
-//     console.log("managed to get to almost");
-//     console.log(input);
-//   }
-//   if (element === "almost") {
-//     applyCorrectColouration(element, indexCount);
-//     indexCount += 1;
-//     input.shift();
-//     console.log("managed to get to almost");
-//     console.log(input);
-//   } else {
-//     applyCorrectColouration(element, indexCount);
-//     indexCount += 1;
-//     console.log("managed to get to none");
-//     console.log(input);
-//   }
-// }
-// console.log(indexCount);
-// console.log(input);
-// };
 
 // submit step 6 - Since not fully correct and we have more guesses to make, how correct was this rows guess?
 const getRowAnswerCorrectnessArray = (inputArr, answerArr) => {
