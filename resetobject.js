@@ -1,48 +1,38 @@
-export const reset = {
-  outputBoxReset: `"<section class="output-grid">
-    <output
-      class="output-grid__display-box display-box-1"
-      value="0"
-    ></output>
-    <output
-      class="output-grid__display-box display-box-2"
-      value="1"
-    ></output>
-    <output
-      class="output-grid__display-box display-box-3"
-      value="2"
-    ></output>
-    <output
-      class="output-grid__display-box display-box-4"
-      value="3"
-    ></output>
-    <output class="output-grid__display-box display-box-5"></output>
-    <output class="output-grid__display-box display-box-6"></output>
-    <output class="output-grid__display-box display-box-7"></output>
-    <output class="output-grid__display-box display-box-8"></output>
-    <output class="output-grid__display-box display-box-9"></output>
-    <output class="output-grid__display-box display-box-10"></output>
-    <output class="output-grid__display-box display-box-11"></output>
-    <output class="output-grid__display-box display-box-12"></output>
-    <output class="output-grid__display-box display-box-13"></output>
-    <output class="output-grid__display-box display-box-14"></output>
-    <output class="output-grid__display-box display-box-15"></output>
-    <output class="output-grid__display-box display-box-16"></output>
-    <output class="output-grid__display-box display-box-17"></output>
-    <output class="output-grid__display-box display-box-18"></output>
-    <output class="output-grid__display-box display-box-19"></output>
-    <output class="output-grid__display-box display-box-20"></output>
-    <output class="output-grid__display-box display-box-21"></output>
-    <output class="output-grid__display-box display-box-22"></output>
-    <output class="output-grid__display-box display-box-23"></output>
-    <output class="output-grid__display-box display-box-24"></output>
-    <output class="output-grid__display-box display-box-25"></output>
-    <output class="output-grid__display-box display-box-26"></output>
-    <output class="output-grid__display-box display-box-27"></output>
-    <output class="output-grid__display-box display-box-28"></output>
-    <output class="output-grid__display-box display-box-29"></output>
-    <output class="output-grid__display-box display-box-30"></output>`,
-  inputGridReset: `<button
+export const resetData = {
+  gameReset: `<section class="output-grid" id="display-grid-container">
+  <output class="output-grid__display-box display-box-1"></output>
+  <output class="output-grid__display-box display-box-2"></output>
+  <output class="output-grid__display-box display-box-3"></output>
+  <output class="output-grid__display-box display-box-4"></output>
+  <output class="output-grid__display-box display-box-5"></output>
+  <output class="output-grid__display-box display-box-6"></output>
+  <output class="output-grid__display-box display-box-7"></output>
+  <output class="output-grid__display-box display-box-8"></output>
+  <output class="output-grid__display-box display-box-9"></output>
+  <output class="output-grid__display-box display-box-10"></output>
+  <output class="output-grid__display-box display-box-11"></output>
+  <output class="output-grid__display-box display-box-12"></output>
+  <output class="output-grid__display-box display-box-13"></output>
+  <output class="output-grid__display-box display-box-14"></output>
+  <output class="output-grid__display-box display-box-15"></output>
+  <output class="output-grid__display-box display-box-16"></output>
+  <output class="output-grid__display-box display-box-17"></output>
+  <output class="output-grid__display-box display-box-18"></output>
+  <output class="output-grid__display-box display-box-19"></output>
+  <output class="output-grid__display-box display-box-20"></output>
+  <output class="output-grid__display-box display-box-21"></output>
+  <output class="output-grid__display-box display-box-22"></output>
+  <output class="output-grid__display-box display-box-23"></output>
+  <output class="output-grid__display-box display-box-24"></output>
+  <output class="output-grid__display-box display-box-25"></output>
+  <output class="output-grid__display-box display-box-26"></output>
+  <output class="output-grid__display-box display-box-27"></output>
+  <output class="output-grid__display-box display-box-28"></output>
+  <output class="output-grid__display-box display-box-29"></output>
+  <output class="output-grid__display-box display-box-30"></output>
+</section>
+<section class="input-grid">
+  <button
     type="button"
     class="input-grid__button button-letter"
     value="Q"
@@ -245,5 +235,7 @@ export const reset = {
     value="SUBMIT"
   >
     SUBMIT
-  </button>`,
+  </button>
+</section>
+</section>`,
 };

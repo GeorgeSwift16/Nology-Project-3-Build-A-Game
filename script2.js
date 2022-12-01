@@ -7,7 +7,6 @@ let answerString = "LLLLP";
 //input variables
 //  Input Buttons
 //    all input buttons
-const allInputButtonsArr = document.querySelectorAll(".input-grid__button");
 //    all letter input buttons
 const allLetterInputButtons = document.querySelectorAll(".button-letter");
 //    specific operator input buttons - Enter, BACK, Reset
@@ -16,40 +15,50 @@ const backInputButton = document.getElementById("BACK");
 const resetInputButton = document.getElementById("RESET");
 const submitInputButton = document.getElementById("SUBMIT");
 // Output variables
-// grid for output
-const outputGridContainer = document.querySelector("#output-grid");
 // All output boxes
 const outputDisplayBoxes = document.querySelectorAll(
   ".output-grid__display-box"
 );
-console.log(outputGridContainer);
-// Default classes to enable reset to revert all forms of styling
+
+const handleReset = () => {
+  activeOutputBoxIndex = 0;
+  outputDisplayBoxes.forEach((element) => {
+    element.innerHTML = "";
+    element.style.backgroundColor = "white";
+  });
+  allLetterInputButtons.forEach((element) => {
+    element.classList.remove("input-grid__button--incorrect");
+  });
+};
 
 /*           colour styling functions- to make into class application  */
 /*                 styling for user focus */
-// initial active box colour on load
-outputDisplayBoxes[0].style.border = "3px solid red";
-// change border color to highlight focused displaybox change
-const getActiveColor = (input) => {
+const handleUserFocusFeedback = (input) => {
   outputDisplayBoxes.forEach((element) => {
-    const borderColor = element == outputDisplayBoxes[input] ? "red" : "grey";
-
-    element.style.border = `3px solid ${borderColor}`;
+    const activeclass = "display-box--active";
+    const inactiveClass = "display-box--inactive";
+    const classToApply =
+      element == outputDisplayBoxes[input] ? activeclass : inactiveClass;
+    const classToRemove =
+      element == outputDisplayBoxes[input] ? inactiveClass : activeclass;
+    element.classList.add(`${classToApply}`);
+    element.classList.remove(`${classToRemove}`);
   });
 };
 /*    styling for user feedback */
 // grey color application for inputbuttons of incorrect characters
 const applyGreyToWrongLetterInputKeys = (input) => {
+  const wrongCharclass = "input-grid__button--incorrect";
   for (let index = 0; index < allLetterInputButtons.length; index++) {
     const element = allLetterInputButtons[index];
     if (input == element.value) {
-      element.style.backgroundColor = "pink";
+      element.classList.add(`${wrongCharclass}`);
     }
   }
 };
 
-// colour application for correctness of row input on row
-const applyCorrectColouration = (correctness, indexCount) => {
+// submit step 8 - colour application for correctness of row input on current row
+const applyColorForAnswerCheckFeedback = (correctness, indexCount) => {
   let activeRowStart = 0;
   activeRowStart = activeOutputBoxIndex - 4;
   let boxToApplyColor = 0;
@@ -66,22 +75,16 @@ const applyCorrectColouration = (correctness, indexCount) => {
 };
 //  ------------------------------------------------------------------------
 
-const handleClearTempVariablesOnLineChange = (inputArray, inputString) => {
-  inputArray = [];
-  inputString = "";
-};
-
-// submit step 7 - Now pass the correct info to the colourupdating function to return feedback to the user based on the correctness of their answer
+// submit step 7 - Now pass the correct info to the colourupdating function to return feedback to the user based on the correctness of their answer - index count used to provide a reference point
 const handleProvideUserFeedback = (input) => {
   let indexCount = 0;
   console.log(input);
   input.forEach((element) => {
-    applyCorrectColouration(element, indexCount);
+    applyColorForAnswerCheckFeedback(element, indexCount);
     indexCount += 1;
   });
   indexCount = 0;
-  handleClearTempVariablesOnLineChange();
-  changeActiveOutput("SUBMIT");
+  updateActiveOutputBoxIndex("SUBMIT");
 };
 
 // submit step 6 - Since not fully correct and we have more guesses to make, how correct was this rows guess?
@@ -103,7 +106,7 @@ const getRowAnswerCorrectnessArray = (inputArr, answerArr) => {
 };
 
 // submit step 5 was this the last guess the player has ?
-const checkIfLastGuess = (inputArray) => {
+const checkIfLastGuessOfGame = (inputArray) => {
   const isLastGuess = activeOutputBoxIndex === 29;
   if (isLastGuess) {
     alert("sorry game over, please hit restart to try again =(");
@@ -118,24 +121,23 @@ const checkIfAnswerCorrect = (inputArray, inputString) => {
   if (isAnswerCorrect) {
     alert("congrats you won! - replace with func");
   } else {
-    checkIfLastGuess(inputArray);
+    checkIfLastGuessOfGame(inputArray);
   }
 };
-// console.log();
+
 // submit step 3 - get a string of the rows input
-const getRowInputString = (inputArray) => {
+const getCurrentRowInputString = (inputArray) => {
   const rowInputString = inputArray.join("");
   const isRowInputComplete = rowInputString.length === 5;
   if (isRowInputComplete) {
     checkIfAnswerCorrect(inputArray, rowInputString);
   } else {
     alert("please fill in all squares before we check your answer!");
-    handleClearTempVariablesOnLineChange(inputArray, rowInputString);
   }
 };
 
 // submit step 2 - get the input for the row - create array from row start to row end based on activeoutputindex
-const getRowInputArr = () => {
+const getCurrentRowInputArray = () => {
   let rowInputHtmlArray = [];
   for (
     let index = activeOutputBoxIndex - 4;
@@ -145,43 +147,44 @@ const getRowInputArr = () => {
     const displayBoxHtml = outputDisplayBoxes[index].innerHTML;
     rowInputHtmlArray.push(displayBoxHtml);
   }
-  getRowInputString(rowInputHtmlArray);
+  getCurrentRowInputString(rowInputHtmlArray);
 };
 
+//            initial input functions to check next steps for each button
 // submit step 1
-const handleCheckIfLineEnd = () => {
+const handleSubmitCheckLineEnd = () => {
   const isLineEnd = (activeOutputBoxIndex + 1) % 5 === 0;
   if (isLineEnd) {
-    getRowInputArr();
+    getCurrentRowInputArray();
   } else {
     alert("You can only submit your answer at the end of the row");
   }
 };
 
-//            initial input functions to check next steps for each button
 const handleLetterInput = (event) => {
   outputDisplayBoxes[activeOutputBoxIndex].innerHTML = event.target.value;
 };
 const handleNextInput = (event) => {
   let checkIfEndOfLine = (activeOutputBoxIndex + 1) % 5;
   if (checkIfEndOfLine) {
-    changeActiveOutput(event.target.value);
+    updateActiveOutputBoxIndex(event.target.value);
   }
 };
 const handleBackInput = (event) => {
   let checkIfNewLine = activeOutputBoxIndex % 5;
   if (activeOutputBoxIndex != 0 && checkIfNewLine) {
-    changeActiveOutput(event.target.value);
+    updateActiveOutputBoxIndex(event.target.value);
   }
 };
 
 const handleResetInput = (event) => {
-  changeActiveOutput(event.target.value);
+  updateActiveOutputBoxIndex(event.target.value);
+  handleReset();
 };
 
 // -----------------------------new code
 // function to change active grid area
-const changeActiveOutput = (input) => {
+const updateActiveOutputBoxIndex = (input) => {
   if (input === "NEXT") {
     activeOutputBoxIndex += 1;
   } else if (input === "BACK") {
@@ -191,7 +194,7 @@ const changeActiveOutput = (input) => {
   } else if (input === "SUBMIT") {
     activeOutputBoxIndex += 1;
   }
-  getActiveColor(activeOutputBoxIndex);
+  handleUserFocusFeedback(activeOutputBoxIndex);
 };
 
 /*                        Event listeners                   */
@@ -203,4 +206,5 @@ for (let index = 0; index < allLetterInputButtons.length; index++) {
 nextInputButton.addEventListener("click", handleNextInput);
 backInputButton.addEventListener("click", handleBackInput);
 resetInputButton.addEventListener("click", handleResetInput);
-submitInputButton.addEventListener("click", handleCheckIfLineEnd);
+submitInputButton.addEventListener("click", handleSubmitCheckLineEnd);
+Window.addEventListener("load", handleUserFocusFeedback(0));
