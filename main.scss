@@ -1,7 +1,7 @@
 @use "./Utilities/variables" as *;
 @use "./base/reset" as *;
 @use "./Utilities/mixins" as *;
-
+@use "./components/buttons" as *;
 body {
   width: 100vw;
   height: 100vh;

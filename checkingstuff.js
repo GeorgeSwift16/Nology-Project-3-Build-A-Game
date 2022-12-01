@@ -13,3 +13,12 @@ create a variable for default classlist to apply to all input / output etc on re
 // allLetterInputButtons
 
 // how to reset the file - change colour updates to class application - then on reset - simply replace all inner html with the resetobject html thus updating the classes and inner text seemlessly. -winning.
+
+// To do
+//  - Reset functionality
+//  - use classes for appying colours
+// - answer generator - attach to reset function.
+// classes for input buttons - to provide feedback on press - scss
+// Update sass for mixins and apply them
+// media queries
+// sort the nav

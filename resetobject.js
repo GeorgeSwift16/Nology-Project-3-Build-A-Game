@@ -1,4 +1,4 @@
-const reset = {
+export const reset = {
   outputBoxReset: `"<section class="output-grid">
     <output
       class="output-grid__display-box display-box-1"

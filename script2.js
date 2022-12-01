@@ -16,10 +16,13 @@ const backInputButton = document.getElementById("BACK");
 const resetInputButton = document.getElementById("RESET");
 const submitInputButton = document.getElementById("SUBMIT");
 // Output variables
-//    All output boxes
+// grid for output
+const outputGridContainer = document.querySelector("#output-grid");
+// All output boxes
 const outputDisplayBoxes = document.querySelectorAll(
   ".output-grid__display-box"
 );
+console.log(outputGridContainer);
 // Default classes to enable reset to revert all forms of styling
 
 /*           colour styling functions- to make into class application  */
@@ -34,7 +37,7 @@ const getActiveColor = (input) => {
     element.style.border = `3px solid ${borderColor}`;
   });
 };
-/*    syling for user feedback */
+/*    styling for user feedback */
 // grey color application for inputbuttons of incorrect characters
 const applyGreyToWrongLetterInputKeys = (input) => {
   for (let index = 0; index < allLetterInputButtons.length; index++) {
