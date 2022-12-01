@@ -13,3 +13,10 @@
 .display-box--active {
   border: 4px solid rgba(27, 27, 241, 0.904);
 }
+.display-box--inactive {
+  border: 4px solid grey;
+}
+.input-grid__button--incorrect {
+  background-color: black;
+  color: white;
+}
