@@ -1,7 +1,9 @@
+import { arrayOfWords } from "./wordsfile.js";
+
 /*                                  Global variables            */
 let activeOutputBoxIndex = 0;
-let answerArray = ["L", "L", "L", "L", "P"];
-let answerString = "LLLLP";
+let answerArray = [];
+let answerString = "";
 
 /*                                  DOM Elements               */
 //input variables
@@ -20,6 +22,19 @@ const outputDisplayBoxes = document.querySelectorAll(
   ".output-grid__display-box"
 );
 
+/*                  Function To generate answer       */
+
+const returnAnswer = () => {
+  let answerArray = [];
+  let answerString = "";
+  const randomNumber = Math.trunc(Math.random() * 4 + 1);
+  answerString = arrayOfWords[randomNumber];
+  answerArray = answerString.split("");
+  console.log(answerString);
+  checkIfAnswerCorrect(answerString);
+};
+
+/*                  Reset Function          */
 const handleReset = () => {
   activeOutputBoxIndex = 0;
   outputDisplayBoxes.forEach((element) => {
@@ -29,9 +44,10 @@ const handleReset = () => {
   allLetterInputButtons.forEach((element) => {
     element.classList.remove("input-grid__button--incorrect");
   });
+  returnAnswer("NEW");
 };
 
-/*           colour styling functions- to make into class application  */
+/*    colour styling functions- */
 /*                 styling for user focus */
 const handleUserFocusFeedback = (input) => {
   outputDisplayBoxes.forEach((element) => {
@@ -207,3 +223,4 @@ backInputButton.addEventListener("click", handleBackInput);
 resetInputButton.addEventListener("click", handleResetInput);
 submitInputButton.addEventListener("click", handleSubmitCheckLineEnd);
 Window.addEventListener("load", handleUserFocusFeedback(0));
+Window.addEventListener("load", returnAnswer("NEW"));
