@@ -1,12 +1,9 @@
 /*                                  Global variables            */
 let activeOutputBoxIndex = 0;
-let rowInputHtmlArray = [];
-let rowInputString = "";
 let answerArray = ["L", "L", "L", "L", "P"];
 let answerString = "LLLLP";
 
-// Active output box
-/*                                  DOM Variables               */
+/*                                  DOM Elements               */
 //input variables
 //  Input Buttons
 //    all input buttons
@@ -23,10 +20,12 @@ const submitInputButton = document.getElementById("SUBMIT");
 const outputDisplayBoxes = document.querySelectorAll(
   ".output-grid__display-box"
 );
+// Default classes to enable reset to revert all forms of styling
 
 /*           colour styling functions- to make into class application  */
-/*                  initial active box colour                  */
-outputDisplayBoxes[activeOutputBoxIndex].style.border = "3px solid red";
+/*                 styling for user focus */
+// initial active box colour on load
+outputDisplayBoxes[0].style.border = "3px solid red";
 // change border color to highlight focused displaybox change
 const getActiveColor = (input) => {
   outputDisplayBoxes.forEach((element) => {
@@ -35,7 +34,7 @@ const getActiveColor = (input) => {
     element.style.border = `3px solid ${borderColor}`;
   });
 };
-
+/*    syling for user feedback */
 // grey color application for inputbuttons of incorrect characters
 const applyGreyToWrongLetterInputKeys = (input) => {
   for (let index = 0; index < allLetterInputButtons.length; index++) {
@@ -64,9 +63,9 @@ const applyCorrectColouration = (correctness, indexCount) => {
 };
 //  ------------------------------------------------------------------------
 
-const handleClearTempVariablesOnLineChange = () => {
-  rowInputHtmlArray = [];
-  rowInputString = "";
+const handleClearTempVariablesOnLineChange = (inputArray, inputString) => {
+  inputArray = [];
+  inputString = "";
 };
 
 // submit step 7 - Now pass the correct info to the colourupdating function to return feedback to the user based on the correctness of their answer
@@ -101,39 +100,40 @@ const getRowAnswerCorrectnessArray = (inputArr, answerArr) => {
 };
 
 // submit step 5 was this the last guess the player has ?
-const checkIfLastGuess = () => {
+const checkIfLastGuess = (inputArray) => {
   const isLastGuess = activeOutputBoxIndex === 29;
   if (isLastGuess) {
     alert("sorry game over, please hit restart to try again =(");
   } else {
-    getRowAnswerCorrectnessArray(rowInputHtmlArray, answerArray);
+    getRowAnswerCorrectnessArray(inputArray, answerArray);
   }
 };
 
 // submit step 4 - check if answer is 100% correct
-const checkIfAnswerCorrect = () => {
-  const isAnswerCorrect = answerString === rowInputString;
+const checkIfAnswerCorrect = (inputArray, inputString) => {
+  const isAnswerCorrect = answerString === inputString;
   if (isAnswerCorrect) {
     alert("congrats you won! - replace with func");
   } else {
-    checkIfLastGuess();
+    checkIfLastGuess(inputArray);
   }
 };
 // console.log();
 // submit step 3 - get a string of the rows input
-const getRowInputString = () => {
-  rowInputString = rowInputHtmlArray.join("");
+const getRowInputString = (inputArray) => {
+  const rowInputString = inputArray.join("");
   const isRowInputComplete = rowInputString.length === 5;
   if (isRowInputComplete) {
-    checkIfAnswerCorrect();
+    checkIfAnswerCorrect(inputArray, rowInputString);
   } else {
     alert("please fill in all squares before we check your answer!");
-    handleClearTempVariablesOnLineChange();
+    handleClearTempVariablesOnLineChange(inputArray, rowInputString);
   }
 };
 
 // submit step 2 - get the input for the row - create array from row start to row end based on activeoutputindex
 const getRowInputArr = () => {
+  let rowInputHtmlArray = [];
   for (
     let index = activeOutputBoxIndex - 4;
     index < activeOutputBoxIndex + 1;
@@ -142,7 +142,7 @@ const getRowInputArr = () => {
     const displayBoxHtml = outputDisplayBoxes[index].innerHTML;
     rowInputHtmlArray.push(displayBoxHtml);
   }
-  getRowInputString();
+  getRowInputString(rowInputHtmlArray);
 };
 
 // submit step 1
