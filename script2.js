@@ -182,7 +182,6 @@ const handleResetInput = (event) => {
   handleReset();
 };
 
-// -----------------------------new code
 // function to change active grid area
 const updateActiveOutputBoxIndex = (input) => {
   if (input === "NEXT") {
