@@ -4,9 +4,7 @@ let rowInputHtmlArray = [];
 let rowInputString = "";
 let answerArray = ["L", "L", "L", "L", "P"];
 let answerString = "LLLLP";
-let charactersAtCorrectPosition = [];
-let charactersGuessedButNotInAnswer = [];
-let indexCount = 0;
+
 // Active output box
 /*                                  DOM Variables               */
 //input variables
@@ -26,7 +24,7 @@ const outputDisplayBoxes = document.querySelectorAll(
   ".output-grid__display-box"
 );
 
-/*           colour styling - to make into class application  */
+/*           colour styling functions- to make into class application  */
 /*                  initial active box colour                  */
 outputDisplayBoxes[activeOutputBoxIndex].style.border = "3px solid red";
 // change border color to highlight focused displaybox change
@@ -43,7 +41,6 @@ const applyGreyToWrongLetterInputKeys = (input) => {
   for (let index = 0; index < allLetterInputButtons.length; index++) {
     const element = allLetterInputButtons[index];
     if (input == element.value) {
-      console.log(element);
       element.style.backgroundColor = "pink";
     }
   }
@@ -67,6 +64,11 @@ const applyCorrectColouration = (correctness, indexCount) => {
 };
 //  ------------------------------------------------------------------------
 
+const handleClearTempVariablesOnLineChange = () => {
+  rowInputHtmlArray = [];
+  rowInputString = "";
+};
+
 // submit step 7 - Now pass the correct info to the colourupdating function to return feedback to the user based on the correctness of their answer
 const handleProvideUserFeedback = (input) => {
   let indexCount = 0;
@@ -76,8 +78,8 @@ const handleProvideUserFeedback = (input) => {
     indexCount += 1;
   });
   indexCount = 0;
-  console.log(input);
-  console.log(input);
+  handleClearTempVariablesOnLineChange();
+  changeActiveOutput("SUBMIT");
 };
 
 // submit step 6 - Since not fully correct and we have more guesses to make, how correct was this rows guess?
@@ -126,6 +128,7 @@ const getRowInputString = () => {
     checkIfAnswerCorrect();
   } else {
     alert("please fill in all squares before we check your answer!");
+    handleClearTempVariablesOnLineChange();
   }
 };
 
