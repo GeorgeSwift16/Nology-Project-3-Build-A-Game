@@ -6,6 +6,7 @@ let answerArray = ["L", "L", "L", "L", "P"];
 let answerString = "LLLLP";
 let charactersAtCorrectPosition = [];
 let charactersGuessedButNotInAnswer = [];
+let indexCount = 0;
 // Active output box
 /*                                  DOM Variables               */
 //input variables
@@ -26,7 +27,7 @@ const outputDisplayBoxes = document.querySelectorAll(
 );
 
 /*           colour styling - to make into class application  */
-/*                  initial box colour                  */
+/*                  initial active box colour                  */
 outputDisplayBoxes[activeOutputBoxIndex].style.border = "3px solid red";
 // change border color to highlight focused displaybox change
 const getActiveColor = (input) => {
@@ -37,28 +38,88 @@ const getActiveColor = (input) => {
   });
 };
 
-const getMatchColor = (input) => {
-  outputDisplayBoxes.forEach((element) => {
-    const borderColor = element == outputDisplayBoxes[input] ? "red" : "grey";
+// colour application for correctness of row input
+const applyCorrectColouration = (correctness, indexCount) => {
+  console.log(correctness);
+  let activeRowStart = 0;
+  activeRowStart = activeOutputBoxIndex - 4;
+  let boxToApplyColor = 0;
+  boxToApplyColor = activeRowStart + indexCount;
+  const boxToColor = outputDisplayBoxes[boxToApplyColor];
+  if (correctness == "match") {
+    boxToColor.style.backgroundColor = "green";
+  } else if (correctness == "almost") {
+    boxToColor.style.backgroundColor = "orange";
+  } else {
+    boxToColor.style.backgroundColor = "grey";
+    charactersGuessedButNotInAnswer.push(correctness);
+  }
+};
+//  ------------------------------------------------------------------------
 
-    element.style.border = `3px solid ${borderColor}`;
+// submit step 7 - Now pass the correct info to the colourupdating function to return feedback to the user based on the correctness of their answer
+// current issue is - when it loops through the chance is captured.
+const handleProvideUserFeedback = (input) => {
+  let indexCount = 0;
+  console.log(input);
+  input.forEach((element) => {
+    applyCorrectColouration(element, indexCount);
+    indexCount += 1;
   });
+  indexCount = 0;
 };
 
-// submit step 6 - if not their last guess, does guess contain any of the answer characters? if it does next step of answer check - if not all html elements where that char is the innerhtml go to grey.
-// ------------------refactor this maybe
+// for (let index = 0; index < input.length; index++) {
+//   let element = input[index];
+//   if (element === "match") {
+//     applyCorrectColouration(element, indexCount);
+//     indexCount += 1;
+//     input.shift();
+//     console.log("managed to get to almost");
+//     console.log(input);
+//   }
+//   if (element === "almost") {
+//     applyCorrectColouration(element, indexCount);
+//     indexCount += 1;
+//     input.shift();
+//     console.log("managed to get to almost");
+//     console.log(input);
+//   } else {
+//     applyCorrectColouration(element, indexCount);
+//     indexCount += 1;
+//     console.log("managed to get to none");
+//     console.log(input);
+//   }
+// }
+// console.log(indexCount);
+// console.log(input);
+// };
 
-// submit step 6 - Does the answer contain any correct characters or should we turn them all grey?
+// submit step 6 - Since not fully correct and we have more guesses to make, how correct was this rows guess?
+const getRowAnswerCorrectnessArray = (inputArr, answerArr) => {
+  let answerCheckArray = [];
+  for (let index = 0; index < inputArr.length; index++) {
+    let element = inputArr[index];
+    const isMatch = element === answerArr[index];
+    const isAlmostMatch = answerArr.includes(element) && !isMatch;
+    if (isMatch) {
+      answerCheckArray.push("match");
+    } else if (isAlmostMatch) {
+      answerCheckArray.push("almost");
+    } else {
+      answerCheckArray.push(element);
+    }
+  }
+  handleProvideUserFeedback(answerCheckArray);
+};
 
-const checkAnswer = () => {};
-// point to start from 30/11/2022
-// submit step 5 - if this guess was incorrect was it their last possible guess?
+// submit step 5 was this the last guess the player has ?
 const checkIfLastGuess = () => {
   const isLastGuess = activeOutputBoxIndex === 29;
   if (isLastGuess) {
     alert("sorry game over, please hit restart to try again =(");
   } else {
-    checkIfAnswerContainsInput();
+    getRowAnswerCorrectnessArray(rowInputHtmlArray, answerArray);
   }
 };
 
