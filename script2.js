@@ -81,6 +81,15 @@ const applyColorForAnswerCheckFeedback = (correctness, indexCount) => {
     boxToColor.style.backgroundColor = "green";
   } else if (correctness == "almost") {
     boxToColor.style.backgroundColor = "orange";
+  } else if (correctness === "WINNER") {
+    for (
+      let index = activeRowStart;
+      index < activeOutputBoxIndex + 1;
+      index++
+    ) {
+      const element = outputDisplayBoxes[index];
+      element.style.backgroundColor = "green";
+    }
   } else {
     boxToColor.style.backgroundColor = "grey";
     applyGreyToWrongLetterInputKeys(correctness);
@@ -131,6 +140,7 @@ const checkIfLastGuessOfGame = (inputArray) => {
 const checkIfAnswerCorrect = (inputArray, inputString) => {
   const isAnswerCorrect = answerString === inputString;
   if (isAnswerCorrect) {
+    applyColorForAnswerCheckFeedback("WINNER", null);
     alert("congrats you won! press reset to go again!");
   } else {
     checkIfLastGuessOfGame(inputArray);
