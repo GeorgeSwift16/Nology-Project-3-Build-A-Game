@@ -39,9 +39,9 @@
 }
 
 body {
-  background-color: rgb(252, 217, 19);
+  background-color: rgb(7, 7, 7);
   color: #f06423;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   display: grid;
   justify-items: center;
@@ -50,8 +50,8 @@ body {
 }
 
 .navigation-bar {
-  background-color: rgb(13, 28, 226);
-  width: 100%;
+  background-color: rgb(226, 151, 13);
+  width: 90%;
   grid-column: 1/2;
   grid-row: 1/2;
   display: flex;
@@ -67,12 +67,13 @@ body {
   flex-grow: 2;
 }
 .navigation-bar__header {
-  color: rgba(255, 255, 0, 0.842);
+  color: rgba(0, 0, 0, 0.842);
   flex-grow: 1;
   text-align: center;
 }
 
 .game-container {
+  background-color: black;
   width: 100%;
   display: grid;
   grid-template-rows: 3fr 2fr;
@@ -89,7 +90,6 @@ body {
   justify-items: center;
 }
 .output-grid__display-box {
-  background-color: rgb(0, 204, 92);
   font-weight: 800;
   font-size: 1.5rem;
   padding-top: 1rem;
