@@ -3,7 +3,6 @@ const arrayOfWords = ["JUDGE", "HEDGE", "LEARN", "LEGAL", "LABEL"];
 let activeOutputBoxIndex = 0;
 
 /*                                  DOM Elements               */
-const theScriptFile = document.getElementById("wordlescrip");
 //input variables
 //  Input Buttons
 //    all input buttons
@@ -30,7 +29,6 @@ const returnAnswer = () => {
   const randomNumber = Math.trunc(Math.random() * 4 + 1);
   answerString = arrayOfWords[randomNumber];
   answerArray = [...answerString];
-  answerString;
 };
 
 /*                  Reset Function          */
@@ -226,5 +224,5 @@ nextInputButton.addEventListener("click", handleNextInput);
 backInputButton.addEventListener("click", handleBackInput);
 resetInputButton.addEventListener("click", handleResetInput);
 submitInputButton.addEventListener("click", handleSubmitCheckLineEnd);
-Window.addEventListener("load", handleUserFocusFeedback(0));
-theScriptFile.addEventListener("load", handleResetInput("RESET"));
+handleUserFocusFeedback(0);
+returnAnswer();
