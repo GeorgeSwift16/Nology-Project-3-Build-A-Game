@@ -1,9 +1,30 @@
 @use "./variables" as *;
 
-// input button style mixin
+//                  header mixins
 
-// output display square style mixin
+// mixin for header
+//  text mixin
+@mixin header {
+  font-family: $wordle-font-family;
+  font-weight: $bold-weight;
+  font-size: $header-font-size;
+}
 
-// mixin for output grid style
+//              output grid mixins
 
-// mixin for input button style
+// outputGrid
+//  text mixin
+@mixin output-grid-text {
+  font-family: $wordle-font-family;
+  font-weight: $semibold-weight;
+  font-size: $output-font-size;
+}
+
+//             Input button mixins
+
+// text mixin
+@mixin input-button-text {
+  font-family: $wordle-font-family;
+  font-weight: $regular-weight;
+  font-size: $input-font-size;
+}

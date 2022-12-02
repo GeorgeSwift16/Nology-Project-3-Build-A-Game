@@ -1,0 +1,16 @@
+@use "../Utilities/variables" as *;
+@use "../Utilities/mixins" as *;
+
+// header
+.navigation-bar__header {
+  @include header;
+}
+
+// output boxes
+.output-grid__display-box {
+  @include output-grid-text;
+}
+// input boxes
+.input-grid__button {
+  @include input-button-text;
+}

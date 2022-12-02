@@ -1,4 +1,5 @@
 @use "../Utilities/variables" as *;
+
 .display-box--match {
   background-color: rgb(12, 121, 12);
   color: white;
@@ -19,5 +20,6 @@
 }
 .input-grid__button--incorrect {
   background-color: black;
-  color: white;
+  border-color: 2px solid $secondary-color;
+  color: $tertiary-color;
 }

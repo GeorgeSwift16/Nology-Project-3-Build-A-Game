@@ -4,6 +4,10 @@
 
 ## Project Introduction
 
+The aim is to build a reponsive functioning game using JS.
+
+Game selected : wordle
+
 ### Programming Languages Used
 
     1. HTML

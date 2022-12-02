@@ -2,25 +2,25 @@
 const arrayOfWords = ["JUDGE", "HEDGE", "LEARN", "LEGAL", "LABEL"];
 let activeOutputBoxIndex = 0;
 
-/*                                  DOM Elements               */
-//input variables
+/*                                  DOM Elements                        */
+/*                               input variables                            */
 //  Input Buttons
-//    all input buttons
-//    all letter input buttons
+//      all letter input buttons
 const allLetterInputButtons = document.querySelectorAll(".button-letter");
 const allInputButtons = document.getElementsByClassName("input-grid__button");
-//    specific operator input buttons - Enter, BACK, Reset
+//      specific operator input buttons - Enter, BACK, Reset
 const nextInputButton = document.getElementById("NEXT");
 const backInputButton = document.getElementById("BACK");
 const resetInputButton = document.getElementById("RESET");
 const submitInputButton = document.getElementById("SUBMIT");
 // Output variables
-// All output boxes
+//    All output boxes
 const outputDisplayBoxes = document.querySelectorAll(
   ".output-grid__display-box"
 );
 
-/*                  Function To generate answer       */
+/*                              Functions                                  */
+/*                  Function To generate answer                         */
 
 let answerArray = [""];
 let answerString = "";
@@ -44,8 +44,8 @@ const handleReset = () => {
   returnAnswer();
 };
 
-/*    colour styling functions- */
-/*                 styling for user focus */
+/*    functions- render colour styling for output and input user feedback  */
+/*                 styling for user active outputbox focus                  */
 const handleUserFocusFeedback = (input) => {
   outputDisplayBoxes.forEach((element) => {
     const activeclass = "display-box--active";
@@ -58,7 +58,7 @@ const handleUserFocusFeedback = (input) => {
     element.classList.remove(`${classToRemove}`);
   });
 };
-/*    styling for user feedback */
+/*                    functions - styling for user feedback              */
 // grey color application for inputbuttons of incorrect characters
 const applyGreyToWrongLetterInputKeys = (input) => {
   const wrongCharclass = "input-grid__button--incorrect";
@@ -69,7 +69,7 @@ const applyGreyToWrongLetterInputKeys = (input) => {
     }
   }
 };
-
+/*              function to apply answer feedback to output grid post submit */
 // submit step 8 - colour application for correctness of row input on current row
 const applyColorForAnswerCheckFeedback = (correctness, indexCount) => {
   let activeRowStart = 0;
