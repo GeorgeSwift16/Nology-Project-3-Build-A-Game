@@ -39,7 +39,7 @@
 }
 
 body {
-  background-color: rgb(7, 7, 7);
+  background-color: white;
   color: #f06423;
   width: 100vw;
   height: 100vh;
@@ -73,7 +73,7 @@ body {
 }
 
 .game-container {
-  background-color: black;
+  background-color: white;
   width: 100%;
   display: grid;
   grid-template-rows: 3fr 2fr;

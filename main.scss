@@ -6,7 +6,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope&family=Montserrat&display=swap");
 
 body {
-  background-color: rgb(7, 7, 7);
+  background-color: white;
   color: $tertiary-color;
   width: 100vw;
   height: 100vh;
@@ -39,7 +39,7 @@ body {
   }
 }
 .game-container {
-  background-color: black;
+  background-color: white;
   width: 100%;
   display: grid;
   grid-template-rows: 3fr 2fr;
