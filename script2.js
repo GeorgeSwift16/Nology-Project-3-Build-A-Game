@@ -1,16 +1,15 @@
-import { arrayOfWords } from "./wordsfile.js";
-
 /*                                  Global variables            */
+const arrayOfWords = ["JUDGE", "HEDGE", "LEARN", "LEGAL", "LABEL"];
 let activeOutputBoxIndex = 0;
-let answerArray = [];
-let answerString = "";
 
 /*                                  DOM Elements               */
+const theScriptFile = document.getElementById("wordlescrip");
 //input variables
 //  Input Buttons
 //    all input buttons
 //    all letter input buttons
 const allLetterInputButtons = document.querySelectorAll(".button-letter");
+const allInputButtons = document.getElementsByClassName("input-grid__button");
 //    specific operator input buttons - Enter, BACK, Reset
 const nextInputButton = document.getElementById("NEXT");
 const backInputButton = document.getElementById("BACK");
@@ -24,14 +23,14 @@ const outputDisplayBoxes = document.querySelectorAll(
 
 /*                  Function To generate answer       */
 
+let answerArray = [""];
+let answerString = "";
 const returnAnswer = () => {
-  let answerArray = [];
-  let answerString = "";
+  console.log("hi");
   const randomNumber = Math.trunc(Math.random() * 4 + 1);
   answerString = arrayOfWords[randomNumber];
-  answerArray = answerString.split("");
-  console.log(answerString);
-  checkIfAnswerCorrect(answerString);
+  answerArray = [...answerString];
+  answerString;
 };
 
 /*                  Reset Function          */
@@ -44,7 +43,7 @@ const handleReset = () => {
   allLetterInputButtons.forEach((element) => {
     element.classList.remove("input-grid__button--incorrect");
   });
-  returnAnswer("NEW");
+  returnAnswer();
 };
 
 /*    colour styling functions- */
@@ -94,7 +93,6 @@ const applyColorForAnswerCheckFeedback = (correctness, indexCount) => {
 // submit step 7 - Now pass the correct info to the colourupdating function to return feedback to the user based on the correctness of their answer - index count used to provide a reference point
 const handleProvideUserFeedback = (input) => {
   let indexCount = 0;
-  console.log(input);
   input.forEach((element) => {
     applyColorForAnswerCheckFeedback(element, indexCount);
     indexCount += 1;
@@ -135,7 +133,7 @@ const checkIfLastGuessOfGame = (inputArray) => {
 const checkIfAnswerCorrect = (inputArray, inputString) => {
   const isAnswerCorrect = answerString === inputString;
   if (isAnswerCorrect) {
-    alert("congrats you won! - replace with func");
+    alert("congrats you won! press reset to go again!");
   } else {
     checkIfLastGuessOfGame(inputArray);
   }
@@ -179,6 +177,10 @@ const handleSubmitCheckLineEnd = () => {
 
 const handleLetterInput = (event) => {
   outputDisplayBoxes[activeOutputBoxIndex].innerHTML = event.target.value;
+  let checkIfEndOfLine = (activeOutputBoxIndex + 1) % 5;
+  if (checkIfEndOfLine) {
+    updateActiveOutputBoxIndex();
+  }
 };
 const handleNextInput = (event) => {
   let checkIfEndOfLine = (activeOutputBoxIndex + 1) % 5;
@@ -208,6 +210,8 @@ const updateActiveOutputBoxIndex = (input) => {
     activeOutputBoxIndex = 0;
   } else if (input === "SUBMIT") {
     activeOutputBoxIndex += 1;
+  } else {
+    activeOutputBoxIndex += 1;
   }
   handleUserFocusFeedback(activeOutputBoxIndex);
 };
@@ -223,4 +227,4 @@ backInputButton.addEventListener("click", handleBackInput);
 resetInputButton.addEventListener("click", handleResetInput);
 submitInputButton.addEventListener("click", handleSubmitCheckLineEnd);
 Window.addEventListener("load", handleUserFocusFeedback(0));
-Window.addEventListener("load", returnAnswer("NEW"));
+theScriptFile.addEventListener("load", handleResetInput("RESET"));

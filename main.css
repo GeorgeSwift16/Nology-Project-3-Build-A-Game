@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope&family=Montserrat&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -25,7 +26,7 @@
 }
 
 .display-box--active {
-  border: 4px solid rgba(27, 27, 241, 0.904);
+  border: 4px solid #f06423;
 }
 
 .display-box--inactive {
@@ -38,15 +39,19 @@
 }
 
 body {
+  background-color: white;
+  color: #f06423;
   width: 100vw;
   height: 100vh;
   display: grid;
-  grid-template-columns: auto;
+  justify-items: center;
+  grid-template-columns: 1fr;
   grid-template-rows: 10vh 1fr;
 }
 
 .navigation-bar {
-  width: 100%;
+  background-color: rgb(226, 151, 13);
+  width: 90%;
   grid-column: 1/2;
   grid-row: 1/2;
   display: flex;
@@ -62,12 +67,14 @@ body {
   flex-grow: 2;
 }
 .navigation-bar__header {
+  color: rgba(0, 0, 0, 0.842);
   flex-grow: 1;
   text-align: center;
 }
 
 .game-container {
-  width: 100vw;
+  background-color: white;
+  width: 100%;
   display: grid;
   grid-template-rows: 3fr 2fr;
   grid-template-columns: 1fr;
@@ -83,13 +90,16 @@ body {
   justify-items: center;
 }
 .output-grid__display-box {
-  padding-top: 2rem;
+  font-weight: 800;
+  font-size: 1.5rem;
+  padding-top: 1rem;
   text-align: center;
   display: block;
   width: 100%;
 }
 
 .input-grid {
+  background-color: orange;
   padding: 0.5rem 0.2rem;
   width: 90%;
   display: grid;
@@ -98,6 +108,15 @@ body {
   gap: 0.5rem;
 }
 .input-grid__button {
+  border: 1px solid purple;
+  border-radius: 3px;
   height: 80%;
   font-size: 0.6rem;
+}
+
+@media screen and (min-width: 760px) {
+  .game-container,
+.navigation-bar {
+    max-width: 70%;
+  }
 }/*# sourceMappingURL=main.css.map */
